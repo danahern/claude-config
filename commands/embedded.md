@@ -93,6 +93,65 @@ if (ret) {
 - Use `--pristine` when changing Kconfig
 - Keep build times short - avoid unnecessary dependencies
 
+## MCP Tool Usage
+
+### Building (zephyr-build MCP)
+ALWAYS use zephyr-build MCP for builds - saves conversation context:
+
+```
+# List what's available
+zephyr-build.list_apps()
+zephyr-build.list_boards(filter="nrf")
+
+# Build
+zephyr-build.build(app="ble_wifi_bridge", board="nrf52840dk/nrf52840", pristine=true)
+
+# Background build for long compiles
+zephyr-build.build(app="ble_wifi_bridge", board="esp32s3_eye/esp32s3/procpu", background=true)
+zephyr-build.build_status(build_id="...")
+
+# Clean
+zephyr-build.clean(app="ble_wifi_bridge")
+```
+
+### Flashing & Debugging (embedded-probe MCP)
+ALWAYS use embedded-probe MCP for hardware:
+
+```
+# Find and connect to probe
+embedded-probe.list_probes()
+embedded-probe.connect(probe_selector="auto", target_chip="nRF52840_xxAA")
+
+# Flash with boot validation (preferred method)
+embedded-probe.validate_boot(
+    session_id="...",
+    file_path="zephyr-apps/apps/ble_wifi_bridge/build/zephyr/zephyr.elf",
+    success_pattern="Booting Zephyr"
+)
+
+# Monitor RTT output
+embedded-probe.rtt_read(session_id="...")
+
+# Direct flash (without boot validation)
+embedded-probe.flash_program(session_id="...", file_path="...zephyr.elf")
+embedded-probe.reset(session_id="...", halt_after_reset=false)
+```
+
+### Common Chip Mappings
+| Board | target_chip |
+|-------|-------------|
+| nrf52840dk/nrf52840 | nRF52840_xxAA |
+| nrf5340dk/nrf5340/cpuapp | nRF5340_xxAA |
+| esp32_devkitc/esp32/procpu | ESP32 |
+| esp32s3_eye/esp32s3/procpu | ESP32-S3 |
+
+### Typical Workflow
+1. `zephyr-build.list_apps()` - find the app
+2. `zephyr-build.build(app, board, pristine=true)` - compile
+3. `embedded-probe.connect(probe_selector="auto", target_chip="...")` - attach probe
+4. `embedded-probe.validate_boot(session_id, file_path, success_pattern="Booting Zephyr")` - flash + verify
+5. `embedded-probe.rtt_read(session_id)` - monitor output
+
 ## When Reviewing Code
 
 Ask:
