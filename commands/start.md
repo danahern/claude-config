@@ -4,12 +4,12 @@ Bootstrap context for an embedded development session. Do ALL of the following:
 
 ## 1. Refresh Recent Learnings
 
-The workspace uses a three-tier learnings system:
-- **Tier 1** (Key Gotchas in CLAUDE.md) — always in context, no action needed
-- **Tier 2** (`.claude/rules/` topic files) — auto-injected when you edit matching files, no action needed
-- **Tier 3** (`/recall` skill) — on-demand search, used as needed during the session
+The workspace uses a knowledge MCP server with three-tier retrieval:
+- **Tier 1** (Key Gotchas in CLAUDE.md) — always in context, auto-generated from severity=critical items
+- **Tier 2** (`.claude/rules/` topic files) — auto-injected when you edit matching files, auto-generated from knowledge store
+- **Tier 3** (`/recall` skill) — on-demand search via `knowledge.search()`
 
-To refresh awareness of recent discoveries, list files in `learnings/` for the current year (`learnings/YYYY/`). Read the titles and tags to build a mental index. If there are more than 50 files, read only the last 3 months (by filename date prefix).
+Call `knowledge.recent()` to see what knowledge items were added or updated recently. Summarize any new items briefly.
 
 ## 2. Recent Activity
 
@@ -32,7 +32,7 @@ Session Start
 - Hardware: [probe type or "none connected"]
 - Recent work: [1-2 line summary]
 - Uncommitted: [files or "clean"]
-- Key gotcha reminder: [most relevant gotcha for likely work]
+- New knowledge: [count of recent items, or "none"]
 ```
 
 Keep it short. The goal is awareness, not a wall of text.

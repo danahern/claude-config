@@ -1,28 +1,30 @@
 # Recall Learnings
 
-Search the learnings corpus for knowledge about a topic. Do ALL of the following:
+Search the knowledge base for information about a topic using the knowledge MCP server. Do ALL of the following:
 
-## 1. Determine Search Terms
+## 1. Determine Search Strategy
 
-Use the topic/keyword provided by the user. If none provided, infer from the current conversation context (e.g., if debugging nRF54L15 flashing, search for `nrf54l15` and `flashing`).
+Use the topic/keyword provided by the user. If none provided, infer from the current conversation context (e.g., if debugging nRF54L15 flashing, search for "nrf54l15 flashing").
 
-## 2. Search Learnings
+Choose the best retrieval mode:
 
-Search `learnings/` using Grep with multiple strategies:
+| Situation | Tool to Use |
+|-----------|-------------|
+| General topic search | `knowledge.search(query, tags?, chips?, category?)` |
+| "What do I need to know for these files?" | `knowledge.for_context(files, board?)` |
+| "Everything about this chip" | `knowledge.for_chip(chip)` |
+| "Everything about this board" | `knowledge.for_board(board)` |
+| "What's new since I was last here?" | `knowledge.recent(days?)` |
+| "What might be outdated?" | `knowledge.stale(days?)` |
+| "What tags/topics exist?" | `knowledge.list_tags(prefix?)` |
 
-1. **By tag**: `tags:.*KEYWORD` in `learnings/**/*.md`
-2. **By title**: `title:.*KEYWORD` in `learnings/**/*.md`
-3. **By body content**: `KEYWORD` in `learnings/**/*.md`
+## 2. Search
 
-Use case-insensitive search. Combine results, deduplicating files that match multiple strategies.
+Run the appropriate query. If the first search returns no results, try broader terms or use `list_tags()` to discover the right vocabulary.
 
 ## 3. Present Results
 
-- If **1-5 matches**: Read each file and present the full learning with title, date, and tags.
-- If **6-15 matches**: Show titles and tags for all matches. Ask the user which ones to read in full.
-- If **>15 matches**: Summarize the count and suggest narrowing the search with more specific terms or tag combinations.
-- If **0 matches**: Say so and suggest related tags or broader search terms.
-
-## 4. Check Rules Files
-
-Also check `.claude/rules/*.md` for relevant curated summaries — these may have additional context beyond individual learning files.
+- If **1-5 matches**: Present each item with title, severity, category, and body.
+- If **6-15 matches**: Show titles and severity for all. Ask the user which to read in full.
+- If **>15 matches**: Summarize the count by category/severity and suggest narrowing with tags, chips, or category filters.
+- If **0 matches**: Say so and suggest related tags from `list_tags()` or broader search terms.

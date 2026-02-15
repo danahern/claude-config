@@ -14,7 +14,16 @@ Review the session for any:
 - Workarounds for tool/hardware quirks
 - Patterns that should be reused
 
-If any exist, create individual learning files in `learnings/YYYY/YYYY-MM-DD-kebab-slug.md` with YAML frontmatter (title, date, author, tags). Then update any relevant `.claude/rules/` topic files with a one-liner summary. Follow the same workflow as the `/learn` skill.
+If any exist, capture each one using `knowledge.capture()` with appropriate metadata:
+- **category**: `hardware` | `toolchain` | `pattern` | `operational`
+- **severity**: `critical` | `important` | `informational`
+- **boards/chips/tools/subsystems**: Scope the knowledge to what it applies to
+- **file_patterns**: Glob patterns for auto-injection into rules files
+- **tags**: 3-5 descriptive tags
+
+Before creating, call `knowledge.search()` to check for duplicates.
+
+After all learnings are captured, call `knowledge.regenerate_rules()` to update `.claude/rules/*.md`.
 
 ## 3. Update Documentation
 
@@ -38,7 +47,8 @@ Present a brief wrap-up:
 ```
 Session Summary
 - Accomplished: [2-3 bullet points]
-- Learnings added: [count, or "none"]
+- Learnings captured: [count, or "none"]
+- Rules regenerated: [yes/no]
 - Docs updated: [files, or "none"]
 - Uncommitted: [files, or "all committed"]
 ```
