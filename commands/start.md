@@ -2,9 +2,14 @@
 
 Bootstrap context for an embedded development session. Do ALL of the following:
 
-## 1. Read Learnings
+## 1. Refresh Recent Learnings
 
-Read all files in the `learnings/` directory (`learnings/*.md`) in the workspace root. Internalize the gotchas — don't repeat past mistakes.
+The workspace uses a three-tier learnings system:
+- **Tier 1** (Key Gotchas in CLAUDE.md) — always in context, no action needed
+- **Tier 2** (`.claude/rules/` topic files) — auto-injected when you edit matching files, no action needed
+- **Tier 3** (`/recall` skill) — on-demand search, used as needed during the session
+
+To refresh awareness of recent discoveries, list files in `learnings/` for the current year (`learnings/YYYY/`). Read the titles and tags to build a mental index. If there are more than 50 files, read only the last 3 months (by filename date prefix).
 
 ## 2. Recent Activity
 

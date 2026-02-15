@@ -14,7 +14,7 @@ Review the session for any:
 - Workarounds for tool/hardware quirks
 - Patterns that should be reused
 
-If any exist, append them to `LEARNINGS.md` in the appropriate section. Use the same format as existing entries: a bold heading + 2-3 sentence explanation with the "why" and the fix.
+If any exist, create individual learning files in `learnings/YYYY/YYYY-MM-DD-kebab-slug.md` with YAML frontmatter (title, date, author, tags). Then update any relevant `.claude/rules/` topic files with a one-liner summary. Follow the same workflow as the `/learn` skill.
 
 ## 3. Update Documentation
 
@@ -23,9 +23,9 @@ If new apps, libraries, tools, or significant features were created:
 - Keep workspace CLAUDE.md authoritative for cross-cutting concerns
 - Keep submodule/library CLAUDE.md files specialized
 
-## 4. Archive Completed Plans
+## 4. Update Plans
 
-Check `~/.claude/plans/` for plan files from this session. If any plans were completed, move them to `~/.claude/plans/archive/`. Leave plans from other projects untouched.
+Check `plans/` for any plans that were worked on this session. Update their status if progress was made (e.g., `In-Progress` → `Complete`). Completed plans stay in `plans/` — don't move or archive them.
 
 ## 5. Commit Prompt
 
