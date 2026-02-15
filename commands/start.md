@@ -4,7 +4,7 @@ Bootstrap context for an embedded development session. Do ALL of the following:
 
 ## 1. Read Learnings
 
-Read `LEARNINGS.md` in the workspace root. Internalize the gotchas — don't repeat past mistakes.
+Read all files in the `learnings/` directory (`learnings/*.md`) in the workspace root. Internalize the gotchas — don't repeat past mistakes.
 
 ## 2. Recent Activity
 
