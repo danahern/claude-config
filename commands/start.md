@@ -32,7 +32,7 @@ Session Start
 - Hardware: [probe type or "none connected"]
 - Recent work: [1-2 line summary]
 - Uncommitted: [files or "clean"]
-- New knowledge: [count of recent items, or "none"]
+- New knowledge: [count or "none recent"]
 ```
 
 Keep it short. The goal is awareness, not a wall of text.
