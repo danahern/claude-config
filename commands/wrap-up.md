@@ -36,6 +36,11 @@ If new apps, libraries, tools, or significant features were created:
 - Keep workspace CLAUDE.md authoritative for cross-cutting concerns
 - Keep submodule/library CLAUDE.md files specialized
 
+**Cross-reference check:** If `.mcp.json` or any `CLAUDE.md` was modified this session, verify consistency:
+- `.mcp.json` server list matches workspace `CLAUDE.md` MCP Servers list
+- `claude-mcps/CLAUDE.md` Available MCPs table includes all servers
+- Agent `mcpServers` frontmatter matches the tools each agent references
+
 ## 5. Update Plans
 
 Check `plans/` for any plans that were worked on this session. Update their status if progress was made (e.g., `In-Progress` → `Complete`). Completed plans stay in `plans/` — don't move or archive them.
