@@ -125,7 +125,7 @@ embedded-probe.connect(probe_selector="auto", target_chip="nRF52840_xxAA")
 # Flash with boot validation (preferred method)
 embedded-probe.validate_boot(
     session_id="...",
-    file_path="zephyr-apps/apps/ble_wifi_bridge/build/zephyr/zephyr.elf",
+    file_path="firmware/apps/ble_wifi_bridge/build/zephyr/zephyr.elf",
     success_pattern="Booting Zephyr"
 )
 

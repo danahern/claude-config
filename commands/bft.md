@@ -17,7 +17,7 @@ Determine the platform from the board name to select the right flash/monitor too
 | `nrf*` | Zephyr + nRF | `.hex` via `nrfutil_program` | RTT via `rtt_attach` + `rtt_read` |
 | `esp32*` | ESP-IDF | `esptool_flash` or `esp-idf-build.flash` | `esp-idf-build.monitor` |
 | `stm32*` | Linux/Zephyr | `deploy` via SSH | `ssh_command` |
-| `alif*` | Linux | `deploy` via SSH/ADB | `ssh_command` or `adb_shell` |
+| `alif*` | Linux/Alif | `alif-flash.jlink_flash()` | `uart.send_command()` |
 | `qemu*` | QEMU | (no flash) | Build + run_tests only |
 | `mps2*` | QEMU | (no flash) | Build + run_tests only |
 
@@ -44,10 +44,16 @@ esp-idf-build.flash(project=<app>, port=<port>)
 ```
 Use `esp-idf-build.detect_device()` if port is unknown.
 
-**Linux boards (STM32MP1, Alif E7):**
+**STM32MP1 boards:**
 ```
 linux-build.deploy(file_path=<artifact>, board_ip=<ip>)
 ```
+
+**Alif boards:**
+```
+alif-flash.jlink_flash(config=<atoc_config>)
+```
+Use the appropriate ATOC config (e.g., `linux-boot-e7-ospi.json`). See alif-flash CLAUDE.md for details.
 
 - If flash fails on nRF, try recovery: `embedded-probe.nrfutil_recover()` then retry.
 - If flash fails, **STOP** and report.

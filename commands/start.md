@@ -13,7 +13,7 @@ Call `knowledge.recent()` to see what knowledge items were added or updated rece
 
 ## 2. Recent Activity
 
-Run `git log --oneline -10` in each submodule (`zephyr-apps/`, `claude-mcps/`, `claude-config/`) and the workspace root. Summarize what changed recently in 2-3 bullet points total.
+Run `git log --oneline -10` in each submodule (`firmware/`, `claude-mcps/`, `claude-config/`, `alif_arm-tf/`, `linux_alif/`) and the workspace root. Summarize what changed recently in 2-3 bullet points total.
 
 ## 3. Check Hardware
 

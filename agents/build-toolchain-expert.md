@@ -4,7 +4,7 @@ description: "Use this agent when dealing with build systems, compiler toolchain
 model: sonnet
 color: green
 memory: project
-mcpServers: [linux-build, zephyr-build, knowledge]
+mcpServers: [linux-build, zephyr-build, knowledge, alif-flash, embedded-probe, elf-analysis]
 ---
 
 You are a senior build systems and toolchain engineer with deep expertise in embedded development toolchains, build systems, containerized build environments, and hardware flashing mechanisms. You have extensive experience debugging and fixing complex build failures across multiple architectures and platforms.
@@ -62,7 +62,7 @@ Use the zephyr-build MCP tools for test orchestration:
 - **Build dirs per-board:** `apps/<name>/build/<board_sanitized>/`. Multiple boards coexist without wiping each other's artifacts.
 - **`integration_platforms` doesn't exclude.** Use `platform_allow` in testcase.yaml to restrict which boards a test can run on.
 - **ESP-IDF Docker:** `source $IDF_PATH/export.sh` needed in each step — entrypoint doesn't run in CI.
-- **Buildroot toolchain prefix:** `arm-none-linux-gnueabihf-` (not `arm-linux-gnueabihf-`).
+- **Buildroot toolchain prefix:** `arm-none-linux-gnueabihf-` (not `arm-linux-gnueabihf-`). Note: Alif TF-A uses `arm-linux-gnueabihf-` — check MEMORY.md for board-specific prefixes.
 
 ## Scope Boundaries
 
