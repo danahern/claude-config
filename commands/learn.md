@@ -29,6 +29,17 @@ Determine these fields from context (ask the user only if ambiguous):
 | Concepts | `flashing`, `testing`, `build-system`, `memory`, `overlay` |
 | Platforms | `macos`, `linux`, `qemu` |
 
+## 2b. Determine Epistemic Basis
+
+Classify how the learning was established:
+
+- **Observed**: Directly confirmed by experiment (e.g., "flashed X, power cycled, verified Y persisted"). Include the verification method.
+- **Inferred**: Reasoned from principles or adjacent evidence but not directly tested (e.g., "we believe X because of principle Y").
+
+Add this to the body as a prefix line: `**Basis:** Observed — [brief verification method]` or `**Basis:** Inferred — [reasoning chain]`.
+
+Inferred knowledge about high-stakes operations (flash persistence, power-cycle survival, boot sequences) should be flagged for verification before being promoted to `severity: critical`.
+
 ## 3. Check for Duplicates
 
 Call `knowledge.search(query)` with the key terms from the learning. If similar items exist, ask the user whether to update the existing item or create a new one.

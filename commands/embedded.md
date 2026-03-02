@@ -152,6 +152,36 @@ embedded-probe.reset(session_id="...", halt_after_reset=false)
 4. `embedded-probe.validate_boot(session_id, file_path, success_pattern="Booting Zephyr")` - flash + verify
 5. `embedded-probe.rtt_read(session_id)` - monitor output
 
+## Session Health Check
+
+Monitor for accumulated failures during a session. When things go wrong repeatedly, the approach may be fundamentally flawed — not just one fix away.
+
+### Escalation Threshold: 3 Failures = STOP
+
+After 3 consecutive unexpected failures (each requiring diagnosis and fixing), do NOT attempt a 4th fix. Run this investigation first:
+
+```
+ESCALATION: 3+ consecutive failures detected
+
+1. What was I trying to accomplish? (restate the original goal)
+2. What approach was I taking? (enumerate the steps)
+3. What assumption does each failed step rely on? (list assumptions)
+4. Which assumptions have been verified by experiment? (vs. inferred/assumed)
+5. Which assumption, if wrong, would explain all failures?
+6. What is the minimal test to verify or falsify that assumption?
+```
+
+### Pre-Flight Before Expensive Operations
+
+Any operation >10 minutes requires a pre-flight check:
+- **Kernel build**: Is the config fragment inside the container? Is `kernel_rebuild` the tool being used?
+- **Flash cycle**: Have artifacts been staged? Has this flash path been verified to survive a power cycle?
+- **New flash path**: Flash a minimal test payload, power cycle, verify before investing in a full flash
+
+### When the User Says "Step Back"
+
+When the user suggests investigating fundamentals instead of the next incremental fix, do it immediately. The user's meta-level assessment of session health is authoritative. "We're close" is optimism bias, not a probability estimate.
+
 ## When Reviewing Code
 
 Ask:

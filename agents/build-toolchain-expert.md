@@ -70,6 +70,17 @@ Use the zephyr-build MCP tools for test orchestration:
 - If asked to **debug embedded crashes** → redirect to the main assistant or embedded-specialist
 - If asked about **probe/flash operations** → embedded-probe MCP tools handle this directly
 
+## Proactive Launch Triggers
+
+This agent should be launched proactively (not only when explicitly requested) in these situations:
+
+- **After the first kernel build failure** that is not obviously a typo or syntax error — audit the complete build pipeline (Docker volume setup, build sequence, staging pipeline)
+- **After any flash failure on hardware that has been recently reconfigured** — verify the flash chain end-to-end including power-cycle persistence
+- **When the user expresses uncertainty about the flash or build process** — investigate proactively before the next attempt
+- **After 2+ consecutive build/flash failures in a session** — the main agent may be in goal-pursuit mode; this agent provides independent diagnostic depth without task-completion pressure
+
+The cost of launching this agent is 2-5 minutes. The cost of not launching it when needed can be hours of wasted build/flash cycles.
+
 ## Diagnostic Methodology
 
 When investigating build or tooling failures:
