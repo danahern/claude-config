@@ -23,6 +23,20 @@ Determine the platform from the board name to select the right flash/monitor too
 
 ## Execution Steps
 
+### Step 0: Log Parameters
+
+Append an entry to `builds/BUILD_LOG.md`:
+```markdown
+## <ISO date> — BFT: <app> on <board>
+
+### Parameters
+- **Operation**: build-flash-test
+- **App**: <app>
+- **Board**: <board>
+- **Platform**: <detected platform from Board Detection table>
+- **Flash method**: <tool from Board Detection table>
+```
+
 ### Step 1: Build
 ```
 zephyr-build.build(app=<app>, board=<board>, pristine=true)
@@ -107,6 +121,17 @@ BFT: <app> on <board>
 Build:  PASS (ROM: 142 KB, RAM: 38 KB)
 Flash:  FAIL — nrfutil_program returned error: "APPROTECT enabled"
         Suggestion: run embedded-probe.nrfutil_recover() then retry
+```
+
+### Step 6: Update Build Log
+
+Update the entry in `builds/BUILD_LOG.md` with results:
+```markdown
+### Result
+- **Build**: PASS | FAIL (ROM: XX KB, RAM: XX KB)
+- **Flash**: PASS | FAIL | SKIPPED
+- **Boot**: PASS | FAIL | SKIPPED
+- **Output**: CLEAN | <error summary>
 ```
 
 ## Notes
